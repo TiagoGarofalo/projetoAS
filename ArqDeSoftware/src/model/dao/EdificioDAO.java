@@ -112,7 +112,7 @@ public class EdificioDAO {
 				EdificioVO edificioVO = new EdificioVO();
 				edificioVO.setEmail(resultado.getString(1));
 				edificioVO.setEnd(resultado.getString(2));
-				edificioVO.setIdadeEdificio(Integer.parseInt(resultado.getString(7)));
+				edificioVO.setIdadeEdificio(Integer.parseInt(resultado.getString(3)));
 				edificioVO.setNomeEdificio(resultado.getString(4));
 				edificioVO.setNomeSindico(resultado.getString(5));
 				edificioVO.setNomeZelador(resultado.getString(6));

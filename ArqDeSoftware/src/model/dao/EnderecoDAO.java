@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import model.vo.EdificioVO;
 import model.vo.EnderecoVO;
 
 public class EnderecoDAO {
@@ -72,24 +71,20 @@ public class EnderecoDAO {
 		return resultado;
 	}
 
-	public int atualizarEdificioDAO(EdificioVO edificioVO) {
+	public int atualizarEenderecoDAO(EnderecoVO enderecoVO) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
-
-		String query = "UPDATE EDIFICIO SET email = '" + edificioVO.getEmail() + "', end = '" + edificioVO.getEnd()
-				+ "', telefone = '" + edificioVO.getIdadeEdificio() + "', nomeEdificio = '"
-				+ edificioVO.getNomeEdificio() + "', nomeSindico = '" + edificioVO.getNomeSindico()
-				+ "', nomeZelador = '" + edificioVO.getNomeZelador() + "', qtdApto = '" + edificioVO.getQtdApto()
-				+ "', qtdBloco = '" + edificioVO.getQtdBloco() + "', telContato = '" + edificioVO.getTelContato()
-				+ "', gasIndividual = '" + edificioVO.getGasIndividual() + " WHERE nomeEdificio = '"
-				+ edificioVO.getNomeEdificio() + "'";
+//(int idEnd, String rua, int num, String bairro, String municipio, int cep)
+		String query = "UPDATE ENDERECO SET idEnd = '" + enderecoVO.getIdEnd() + "', rua = '" + enderecoVO.getNum()
+				+ "', bairro = '" + enderecoVO.getBairro() + "', municipio = '"
+				+ enderecoVO.getMunicipio() + "', cep = '" + enderecoVO.getCep() + "'";
 
 		try {
 			resultado = stmt.executeUpdate(query);
 
 		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de atualização do Edifício.");
+			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de atualização.");
 		} finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
@@ -97,65 +92,58 @@ public class EnderecoDAO {
 		return resultado;
 	}
 
-	public ArrayList<EdificioVO> consultarTodosEdificiosDAO() {
+	public ArrayList<EnderecoVO> consultarTodosEnderecosDAO() {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		ArrayList<EdificioVO> edificiosVO = new ArrayList<EdificioVO>();
-		String query = "SELECT * FROM EDIFICIO";
+		ArrayList<EnderecoVO> enderecosVO = new ArrayList<EnderecoVO>();
+		String query = "SELECT * FROM ENDERECO";
 		try {
 			resultado = stmt.executeQuery(query);
 			while (resultado.next()) {
-				EdificioVO edificioVO = new EdificioVO();
-				edificioVO.setEmail(resultado.getString(1));
-				edificioVO.setEnd(resultado.getString(2));
-				edificioVO.setIdadeEdificio(Integer.parseInt(resultado.getString(7)));
-				edificioVO.setNomeEdificio(resultado.getString(4));
-				edificioVO.setNomeSindico(resultado.getString(5));
-				edificioVO.setNomeZelador(resultado.getString(6));
-				edificioVO.setQtdApto(Integer.parseInt(resultado.getString(7)));
-				edificioVO.setQtdBloco(Integer.parseInt(resultado.getString(8)));
-				edificioVO.setTelContato(Integer.parseInt(resultado.getString(9)));
-				edificioVO.setGasIndividual(resultado.getString(10));
+//(int idEnd, String rua, int num, String bairro, String municipio, int cep)
+				EnderecoVO enderecoVO = new EnderecoVO();
+				enderecoVO.setIdEnd(Integer.parseInt(resultado.getString(1)));
+				enderecoVO.setRua(resultado.getString(2));
+				enderecoVO.setNum(Integer.parseInt(resultado.getString(3)));
+				enderecoVO.setBairro(resultado.getString(4));
+				enderecoVO.setMunicipio(resultado.getString(5));
+				enderecoVO.setCep(Integer.parseInt(resultado.getString(6)));
 			}
 		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de consulta de Edifícios.");
+			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de consulta de Enderecos.");
 		} finally {
 			Banco.closeResultSet(resultado);
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		return edificiosVO;
+		return enderecosVO;
 	}
 
-	public EdificioVO consultarEdificioDAO(EdificioVO edificioVO) {
+	public EnderecoVO consultarEnderecoDAO(EnderecoVO enderecoVO) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		EdificioVO edificio = new EdificioVO();
-		String query = "SELECT * FROM EDIFICIO WHERE nomeEdificio like '" + edificioVO.getNomeEdificio() + "'";
+		EnderecoVO endereco = new EnderecoVO();
+		String query = "SELECT * FROM ENDERECO  WHERE idEnd = " + enderecoVO.getIdEnd();
 		try {
 			resultado = stmt.executeQuery(query);
 			while (resultado.next()) {
-				edificio.setEmail(resultado.getString(1));
-				edificio.setEnd(resultado.getString(2));
-				edificio.setIdadeEdificio(Integer.parseInt(resultado.getString(7)));
-				edificio.setNomeEdificio(resultado.getString(4));
-				edificio.setNomeSindico(resultado.getString(5));
-				edificio.setNomeZelador(resultado.getString(6));
-				edificio.setQtdApto(Integer.parseInt(resultado.getString(7)));
-				edificio.setQtdBloco(Integer.parseInt(resultado.getString(8)));
-				edificio.setTelContato(Integer.parseInt(resultado.getString(9)));
-				edificio.setGasIndividual(resultado.getString(10));
+				enderecoVO.setIdEnd(Integer.parseInt(resultado.getString(1)));
+				enderecoVO.setRua(resultado.getString(2));
+				enderecoVO.setNum(Integer.parseInt(resultado.getString(3)));
+				enderecoVO.setBairro(resultado.getString(4));
+				enderecoVO.setMunicipio(resultado.getString(5));
+				enderecoVO.setCep(Integer.parseInt(resultado.getString(6)));
 			}
 		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de consulta de Edifício.");
+			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de consulta.");
 		} finally {
 			Banco.closeResultSet(resultado);
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		return edificio;
+		return endereco;
 	}
 	
 }
