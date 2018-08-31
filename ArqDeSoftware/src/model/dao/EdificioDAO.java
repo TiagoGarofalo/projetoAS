@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import model.vo.ColecionadorVO;
 import model.vo.EdificioVO;
 
 public class EdificioDAO {
@@ -110,16 +109,16 @@ public class EdificioDAO {
 			resultado = stmt.executeQuery(query);
 			while (resultado.next()) {
 				EdificioVO edificioVO = new EdificioVO();
-				edificioVO.setEmail(resultado.getString(1));
-				edificioVO.setEnd(resultado.getString(2));
-				edificioVO.setIdadeEdificio(Integer.parseInt(resultado.getString(3)));
-				edificioVO.setNomeEdificio(resultado.getString(4));
-				edificioVO.setNomeSindico(resultado.getString(5));
-				edificioVO.setNomeZelador(resultado.getString(6));
-				edificioVO.setQtdApto(Integer.parseInt(resultado.getString(7)));
-				edificioVO.setQtdBloco(Integer.parseInt(resultado.getString(8)));
-				edificioVO.setTelContato(Integer.parseInt(resultado.getString(9)));
-				edificioVO.setGasIndividual(resultado.getString(10));
+				edificioVO.setEmail(resultado.getString("email"));
+				//edificioVO.setEnd(resultado.getss(2))Cla;
+				edificioVO.setIdadeEdificio(Integer.parseInt(resultado.getString("idade")));
+				edificioVO.setNomeEdificio(resultado.getString("nome"));
+				edificioVO.setNomeSindico(resultado.getString("sindico"));
+				edificioVO.setNomeZelador(resultado.getString("zelador"));
+				edificioVO.setQtdApto(Integer.parseInt(resultado.getString("apto")));
+				edificioVO.setQtdBloco(Integer.parseInt(resultado.getString("bloco")));
+				edificioVO.setTelContato(Integer.parseInt(resultado.getString("tel")));
+				edificioVO.setGasIndividual(resultado.getString("gas"));
 			}
 		} catch (SQLException e) {
 			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de consulta de Edifícios.");
@@ -140,16 +139,16 @@ public class EdificioDAO {
 		try {
 			resultado = stmt.executeQuery(query);
 			while (resultado.next()) {
-				edificio.setEmail(resultado.getString(1));
-				edificio.setEnd(resultado.getString(2));
-				edificio.setIdadeEdificio(Integer.parseInt(resultado.getString(7)));
-				edificio.setNomeEdificio(resultado.getString(4));
-				edificio.setNomeSindico(resultado.getString(5));
-				edificio.setNomeZelador(resultado.getString(6));
-				edificio.setQtdApto(Integer.parseInt(resultado.getString(7)));
-				edificio.setQtdBloco(Integer.parseInt(resultado.getString(8)));
-				edificio.setTelContato(Integer.parseInt(resultado.getString(9)));
-				edificio.setGasIndividual(resultado.getString(10));
+				edificioVO.setEmail(resultado.getString("email"));
+				//edificioVO.setEnd(resultado.getss(2))Cla;
+				edificioVO.setIdadeEdificio(Integer.parseInt(resultado.getString("idade")));
+				edificioVO.setNomeEdificio(resultado.getString("nome"));
+				edificioVO.setNomeSindico(resultado.getString("sindico"));
+				edificioVO.setNomeZelador(resultado.getString("zelador"));
+				edificioVO.setQtdApto(Integer.parseInt(resultado.getString("apto")));
+				edificioVO.setQtdBloco(Integer.parseInt(resultado.getString("bloco")));
+				edificioVO.setTelContato(Integer.parseInt(resultado.getString("tel")));
+				edificioVO.setGasIndividual(resultado.getString("gas"));
 			}
 		} catch (SQLException e) {
 			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de consulta de Edifício.");
