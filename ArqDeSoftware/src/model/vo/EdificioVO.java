@@ -7,14 +7,14 @@ public class EdificioVO {
 	private int qtdBloco;
 	private String nomeSindico;
 	private String nomeZelador;
-	private boolean gasIndividual;
+	private String gasIndividual;
 	private String nomeEdificio;
 	private int idadeEdificio;
 	private String email;
-	private int telContato;
+	private long telContato;
 	
 	public EdificioVO(int qtdApto, EnderecoVO end, int qtdBloco, String nomeSindico, String nomeZelador,
-			boolean gasIndividual, String nomeEdificio, int idadeEdificio, String email, int telContato) {
+			String gasIndividual, String nomeEdificio, int idadeEdificio, String email, long telContato) {
 		super();
 		this.qtdApto = qtdApto;
 		this.end = end;
@@ -63,10 +63,10 @@ public class EdificioVO {
 	public void setNomeZelador(String nomeZelador) {
 		this.nomeZelador = nomeZelador;
 	}
-	public boolean isGasIndividual() {
+	public String getGasIndividual() {
 		return gasIndividual;
 	}
-	public void setGasIndividual(boolean gasIndividual) {
+	public void setGasIndividual(String gasIndividual) {
 		this.gasIndividual = gasIndividual;
 	}
 	public String getNomeEdificio() {
@@ -87,10 +87,10 @@ public class EdificioVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getTelContato() {
+	public long getTelContato() {
 		return telContato;
 	}
-	public void setTelContato(int telContato) {
+	public void setTelContato(long telContato) {
 		this.telContato = telContato;
 	}
 		

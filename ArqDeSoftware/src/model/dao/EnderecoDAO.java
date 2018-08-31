@@ -8,24 +8,23 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import model.vo.ColecionadorVO;
 import model.vo.EdificioVO;
+import model.vo.EnderecoVO;
 
-public class EdificioDAO {
+public class EnderecoDAO {
 
-	public boolean existeRegistroPorNomeEdificio(String nomeEdificio) {
+	public boolean existeRegistroPorIdEnd(int idEnd) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT * FROM EDIFICIO " + "WHERE nomeEdificio like '" + nomeEdificio + "'";
+		String query = "SELECT * FROM ENDERECO " + "WHERE idEnd like '" + idEnd + "'";
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null,
-					"Erro ao executar a query que verifica existencia de colecionador por Nome do Edifício.");
+			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query que verifica existencia de endereço por ID.");
 			return false;
 		} finally {
 			Banco.closeResultSet(resultado);
@@ -35,16 +34,14 @@ public class EdificioDAO {
 		return false;
 	}
 
-	public int CadastrarEdificioDAO(EdificioVO edificioVO) {
+	public int CadastrarEndDAO(EnderecoVO enderecoVO) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
 		String query = "INSERT INTO edificio (email, end, idadeEdificio, nomeEdificio, nomeSindico, nomeZelador, qtdApto, qtdBloco,"
-				+ " telContato, gasIndividuall) VALUES ('" + edificioVO.getEmail() + "', '" + "', '"
-				+ edificioVO.getEnd() + "', '" + edificioVO.getIdadeEdificio() + "', '" + edificioVO.getNomeEdificio()
-				+ "', '" + "', '" + edificioVO.getNomeSindico() + "', '" + "', '" + edificioVO.getNomeZelador() + "', '"
-				+ edificioVO.getQtdApto() + "', '" + edificioVO.getQtdBloco() + "', '" + edificioVO.getTelContato()
-				+ "', '" + edificioVO.getGasIndividual() + "')";
+				+ " telContato, gasIndividuall) VALUES ('" + enderecoVO.getIdEnd() + "', '"
+				+ enderecoVO.getRua() + "', '" + enderecoVO.getNum() + "', '" + enderecoVO.getBairro() + "', '" 
+				+ enderecoVO.getMunicipio() + "', '" + enderecoVO.getCep() + "')";
 		try {
 			resultado = stmt.executeUpdate(query);
 
@@ -58,16 +55,16 @@ public class EdificioDAO {
 		return resultado;
 	}
 
-	public int excluirEdificioDAO(EdificioVO edificioVO) {
+	public int excluirEnderecoDAO(EnderecoVO enderecoVO) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
-		String query = "DELETE FROM EDIFICIO " + "WHERE nomeEdificio like '" + edificioVO.getNomeEdificio() + "'";
+		String query = "DELETE FROM ENDERECO" + " WHERE idEnd = " + enderecoVO.getIdEnd();
 		try {
 			resultado = stmt.executeUpdate(query);
 
 		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de exclusão do Edifício.");
+			JOptionPane.showInternalMessageDialog(null, "Erro ao executar a query de exclusão.");
 		} finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
